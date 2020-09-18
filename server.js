@@ -3,8 +3,10 @@ const app = express();
  
 // Utiliza el indez que esta en la carpeta de public
 app.use((express.static(__dirname + '/public')));
+// 
+app.set('view engine', 'hbs');
 
-app.get('/',  (req, res) => {
+/* app.get('/',  (req, res) => {
   // res.send(JSON.stringify(salida));
   let salida = {
     nombre: 'Daniel',
@@ -13,6 +15,15 @@ app.get('/',  (req, res) => {
 
 };
 res.send(JSON.stringify(salida));
+}); */
+
+app.get('/',  (req, res) => {
+  // res.send(JSON.stringify(salida));
+  
+res.render('home',{
+  nombre: 'Daniel',
+  anio: new Date().getFullYear()
+});
 });
  
 
