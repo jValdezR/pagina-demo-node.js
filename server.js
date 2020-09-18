@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
- 
-// Utiliza el indez que esta en la carpeta de public
+
+const hbs = require('hbs');
+
+require('./hbs/helpers')
+// Utiliza los html que esta en la carpeta de public
 app.use((express.static(__dirname + '/public')));
-// 
+
+// Carga los componentes reutilizables
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 app.set('view engine', 'hbs');
+
+
 
 /* app.get('/',  (req, res) => {
   // res.send(JSON.stringify(salida));
@@ -22,9 +29,14 @@ app.get('/',  (req, res) => {
   
 res.render('home',{
   nombre: 'Daniel',
-  anio: new Date().getFullYear()
 });
+
+
 });
+
+app.get('/about',(req,res) => {
+  res.render('about');
+})
  
 
 app.get('/data',  (req, res) => {
